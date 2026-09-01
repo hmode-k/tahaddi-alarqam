@@ -1,558 +1,262 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تحدي الأرقام</title>
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="theme-color" content="#11152A">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="تحدي الأرقام">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحدي الأرقام المطور</title>
+    <style>
+        :root {
+            --bg: #11152A;
+            --card: #1C2246;
+            --text: #F1F5F9;
+            --easy: #3FCB82;
+            --med: #F5A62C;
+            --hard: #F45F60;
+            --gold: #FFD166;
+        }
 
-:root{
-  --bg:#11152A;
-  --bg2:#171C38;
-  --card:#1C2346;
-  --line:#2C3568;
-  --ink:#EDEFFB;
-  --ink-dim:#8991C4;
-  --easy:#3FCB82;
-  --easy-d:#255C40;
-  --med:#F5AA3C;
-  --med-d:#6B4C1A;
-  --hard:#F45F60;
-  --hard-d:#6B2A2A;
-  --gold:#FFD166;
-  --kids:#4FB8E8;
-  --kids-d:#1E4C63;
-}
-*{box-sizing:border-box;}
-body{
-  margin:0;
-  background:var(--bg);
-  background-image:radial-gradient(circle at 90% -10%, rgba(63,203,130,.10), transparent 40%),
-                    radial-gradient(circle at 0% 100%, rgba(244,95,96,.08), transparent 40%);
-  color:var(--ink);
-  font-family:'Cairo',sans-serif;
-  min-height:100vh;
-}
-.wrap{max-width:460px; margin:0 auto; padding:26px 18px 40px; min-height:100vh; position:relative;}
-.screen{display:none;}
-.screen.active{display:block;}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
 
-/* HOME */
-.top-actions{display:flex; gap:8px; margin-bottom:16px;}
-.icon-btn{
-  flex:1; background:var(--card); border:1px solid var(--line); color:var(--ink-dim);
-  padding:9px 8px; border-radius:12px; font-family:'Cairo',sans-serif; font-size:12.5px; font-weight:700;
-  cursor:pointer;
-}
-.brand{text-align:center; margin-bottom:8px;}
-.brand h1{
-  font-size:30px;
-  font-weight:900;
-  margin:0 0 4px;
-  background:linear-gradient(90deg,var(--easy),var(--med),var(--hard));
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-.brand p{margin:0; font-size:13.5px; color:var(--ink-dim);}
+        .container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--card);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
 
-.best-row{
-  display:flex;
-  justify-content:center;
-  gap:22px;
-  margin:18px 0 26px;
-}
-.best-item{text-align:center;}
-.best-item .n{font-size:20px; font-weight:800; color:var(--gold);}
-.best-item .l{font-size:11px; color:var(--ink-dim); margin-top:2px;}
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-.daily-card{
-  display:flex; align-items:center; justify-content:space-between;
-  background:linear-gradient(90deg,#173226,#1C2346);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:14px 16px;
-  margin-bottom:14px;
-  cursor:pointer;
-}
-.daily-title{font-size:14px; font-weight:800; color:var(--easy);}
-.daily-sub{font-size:11.5px; color:var(--ink-dim); margin-top:2px;}
-.daily-cta{
-  background:var(--easy-d); color:var(--easy); font-weight:800; font-size:13px;
-  padding:9px 16px; border-radius:10px;
-}
+        .score-box, .high-score-box {
+            font-size: 14px;
+            background: rgba(255,255,255,0.05);
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
 
-.badges-row{
-  display:flex; gap:10px; overflow-x:auto; margin-bottom:16px; padding-bottom:2px;
-  -ms-overflow-style:none; scrollbar-width:none;
-}
-.badges-row::-webkit-scrollbar{display:none;}
-.badge{
-  flex:0 0 auto; width:60px; text-align:center;
-}
-.badge-icon{
-  width:52px; height:52px; border-radius:16px; background:var(--card); border:1px solid var(--line);
-  display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto 4px;
-}
-.badge.locked .badge-icon{opacity:.35; filter:grayscale(1);}
-.badge-label{font-size:9.5px; color:var(--ink-dim);}
+        .timer-bar {
+            width: 100%;
+            height: 8px;
+            background: #2A315C;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
 
-.diff-card{
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:14px;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-  border:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.diff-card[data-d="easy"]{background:linear-gradient(135deg,#173A2C,var(--card));}
-.diff-card[data-d="medium"]{background:linear-gradient(135deg,#3A2E14,var(--card));}
-.diff-card[data-d="hard"]{background:linear-gradient(135deg,#3A1717,var(--card));}
-.diff-card[data-d="kids"]{background:linear-gradient(135deg,#123246,var(--card));}
-.diff-card:active{transform:scale(.98);}
-.diff-name{font-size:17px; font-weight:800; margin:0 0 3px;}
-.diff-desc{font-size:12px; color:var(--ink-dim); margin:0;}
-.diff-card[data-d="easy"] .diff-name{color:var(--easy);}
-.diff-card[data-d="medium"] .diff-name{color:var(--med);}
-.diff-card[data-d="hard"] .diff-name{color:var(--hard);}
-.diff-card[data-d="kids"] .diff-name{color:var(--kids);}
-.diff-badge{
-  font-size:22px;
-  width:44px; height:44px;
-  border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:900;
-}
-.diff-card[data-d="easy"] .diff-badge{background:var(--easy-d); color:var(--easy);}
-.diff-card[data-d="medium"] .diff-badge{background:var(--med-d); color:var(--med);}
-.diff-card[data-d="hard"] .diff-badge{background:var(--hard-d); color:var(--hard);}
-.diff-card[data-d="kids"] .diff-badge{background:var(--kids-d); color:var(--kids);}
+        .timer-fill {
+            height: 100%;
+            width: 100%;
+            background: var(--easy);
+            transition: width 0.1s linear;
+        }
 
-/* GAME */
-.game-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
-}
-.exit-btn{
-  background:var(--card); border:1px solid var(--line); color:var(--ink-dim);
-  width:36px; height:36px; border-radius:10px; font-size:16px; cursor:pointer;
-}
-.score-pill{
-  background:var(--card); border:1px solid var(--line);
-  padding:7px 14px; border-radius:20px; font-size:13.5px; font-weight:700;
-  display:flex; align-items:center; gap:6px;
-}
-.score-pill .gold{color:var(--gold);}
-.streak-pill{
-  background:var(--card); border:1px solid var(--line);
-  padding:7px 12px; border-radius:20px; font-size:13px; font-weight:700; color:var(--hard);
-}
+        .question {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
 
-.timer-track{
-  height:6px; background:var(--card); border-radius:4px; overflow:hidden; margin-bottom:26px;
-}
-.timer-fill{height:100%; border-radius:4px; transition:width 1s linear, background .3s;}
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
 
-.q-card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:38px 20px;
-  text-align:center;
-  margin-bottom:22px;
-}
-.q-label{font-size:12px; color:var(--ink-dim); margin-bottom:10px;}
-.q-expr{font-size:38px; font-weight:800; letter-spacing:1px; direction:ltr;}
+        .btn {
+            background: #2A315C;
+            color: var(--text);
+            border: none;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
 
-.answers{display:flex; flex-direction:column; gap:10px;}
-.opt-btn{
-  flex:1;
-  padding:16px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:var(--card);
-  color:var(--ink);
-  font-family:'Cairo',sans-serif;
-  font-size:18px;
-  font-weight:700;
-  cursor:pointer;
-}
-.opt-btn:active{opacity:.8;}
+        .btn:active {
+            transform: scale(0.98);
+        }
 
-/* RESULT */
-.result-card{
-  text-align:center;
-  padding:40px 20px;
-}
-.result-emoji{font-size:52px; margin-bottom:14px;}
-.result-title{font-size:22px; font-weight:800; margin-bottom:6px;}
-.result-sub{font-size:14px; color:var(--ink-dim); margin-bottom:26px;}
-.result-stats{
-  display:flex;
-  justify-content:center;
-  gap:26px;
-  margin-bottom:30px;
-}
-.result-stats .n{font-size:24px; font-weight:800; color:var(--gold);}
-.result-stats .l{font-size:11.5px; color:var(--ink-dim); margin-top:3px;}
-.result-actions{display:flex; flex-direction:column; gap:10px;}
-.btn-primary{
-  padding:15px; border-radius:14px; border:none;
-  background:var(--gold); color:#2A1F00; font-weight:800; font-size:15px;
-  font-family:'Cairo',sans-serif; cursor:pointer;
-}
-.btn-secondary{
-  padding:15px; border-radius:14px; border:1px solid var(--line);
-  background:transparent; color:var(--ink); font-weight:700; font-size:14.5px;
-  font-family:'Cairo',sans-serif; cursor:pointer;
-}
+        .btn-start {
+            background: var(--easy);
+            width: 100%;
+            margin-top: 15px;
+        }
 
-.lb-row{
-  display:flex; align-items:center; gap:12px;
-  background:var(--card); border:1px solid var(--line); border-radius:14px;
-  padding:12px 14px; margin-bottom:8px;
-}
-.lb-rank{width:22px; font-weight:800; color:var(--ink-dim); font-size:13px;}
-.lb-name{flex:1; font-size:14px; font-weight:700;}
-.lb-score{font-size:13.5px; font-weight:800; color:var(--gold);}
-</style>
+        .streak-badge {
+            color: var(--gold);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
-<div class="wrap">
 
-  <!-- HOME -->
-  <div class="screen active" id="screen-home">
-    <div class="top-actions">
-      <button class="icon-btn" onclick="openLeaderboard()">🏆 المتصدرون</button>
-      <button class="icon-btn" onclick="openStore()">🎨 المتجر</button>
-    </div>
-    <div class="brand">
-      <h1>تحدي الأرقام</h1>
-      <p>اختبر سرعتك وذكائك بالحساب</p>
-    </div>
-    <div class="best-row">
-      <div class="best-item"><div class="n" id="bestEasy">0</div><div class="l">أفضل نتيجة سهل</div></div>
-      <div class="best-item"><div class="n" id="bestMed">0</div><div class="l">متوسط</div></div>
-      <div class="best-item"><div class="n" id="bestHard">0</div><div class="l">صعب</div></div>
+<div class="container">
+    <div class="header">
+        <div class="score-box">النقاط: <span id="score">0</span></div>
+        <div class="high-score-box">أعلى نتيجة: <span id="highScore">0</span></div>
     </div>
 
-    <div class="daily-card" onclick="startGame('easy')">
-      <div class="daily-left">
-        <div class="daily-title">التحدي اليومي 🔥</div>
-        <div class="daily-sub"><span id="dailyStreakTxt">يومك الأول</span> · نقاط مضاعفة اليوم</div>
-      </div>
-      <div class="daily-cta">العب</div>
+    <div id="startScreen">
+        <h1>تحدي الأرقام 🧠</h1>
+        <p>اختبر سرعتك في حل العمليات الحسابية!</p>
+        <button class="btn btn-start" onclick="startGame()">ابدأ اللعب</button>
     </div>
 
-    <div class="badges-row" id="badgesRow"></div>
-
-    <div class="diff-card" data-d="kids" onclick="startGame('kids')">
-      <div>
-        <p class="diff-name">أطفال 🧸</p>
-        <p class="diff-desc">أرقام صغيرة · ١٥ ثانية</p>
-      </div>
-      <div class="diff-badge">★</div>
+    <div id="gameScreen" class="hidden">
+        <div class="streak-badge" id="streakBox">سلسلة الإجابات: 0 🔥</div>
+        <div class="timer-bar">
+            <div class="timer-fill" id="timerFill"></div>
+        </div>
+        <div class="question" id="questionBox">0 + 0</div>
+        <div class="options-grid" id="optionsGrid"></div>
     </div>
 
-    <div class="diff-card" data-d="easy" onclick="startGame('easy')">
-      <div>
-        <p class="diff-name">سهل</p>
-        <p class="diff-desc">جمع وطرح بسيط · ١٥ ثانية لكل سؤال</p>
-      </div>
-      <div class="diff-badge">+</div>
+    <div id="endScreen" class="hidden">
+        <h2>انتهى الوقت! ⏱️</h2>
+        <p>مجموع نقاطك: <span id="finalScore">0</span></p>
+        <button class="btn btn-start" onclick="startGame()">إعادة المحاولة</button>
     </div>
-
-    <div class="diff-card" data-d="medium" onclick="startGame('medium')">
-      <div>
-        <p class="diff-name">متوسط</p>
-        <p class="diff-desc">ضرب وقسمة وأرقام أكبر · ١٥ ثانية</p>
-      </div>
-      <div class="diff-badge">×</div>
-    </div>
-
-    <div class="diff-card" data-d="hard" onclick="startGame('hard')">
-      <div>
-        <p class="diff-name">صعب</p>
-        <p class="diff-desc">معادلات مركبة · ١٥ ثانية</p>
-      </div>
-      <div class="diff-badge">%</div>
-    </div>
-  </div>
-
-  <!-- GAME -->
-  <div class="screen" id="screen-game">
-    <div class="game-top">
-      <button class="exit-btn" onclick="goHome()">✕</button>
-      <div class="streak-pill" id="streakPill">🔥 0</div>
-      <div class="score-pill"><span class="gold" id="scoreVal">0</span> نقطة</div>
-    </div>
-    <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
-
-    <div class="q-card">
-      <div class="q-label" id="qLabel">سؤال ١</div>
-      <div class="q-expr" id="qExpr">?</div>
-    </div>
-
-    <div class="answers" id="answersArea"></div>
-  </div>
-
-  <!-- RESULT -->
-  <div class="screen" id="screen-result">
-    <div class="result-card">
-      <div class="result-emoji" id="resEmoji">🏆</div>
-      <div class="result-title" id="resTitle">أحسنت!</div>
-      <div class="result-sub" id="resSub">خلصت التحدي</div>
-      <div class="result-stats">
-        <div><div class="n" id="resScore">0</div><div class="l">النقاط</div></div>
-        <div><div class="n" id="resStreak">0</div><div class="l">أفضل سلسلة</div></div>
-      </div>
-      <div class="result-actions">
-        <button class="btn-primary" onclick="retryGame()">إعادة المحاولة</button>
-        <button class="btn-secondary" onclick="goHome()">رجوع للرئيسية</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- LEADERBOARD -->
-  <div class="screen" id="screen-leaderboard">
-    <div class="game-top">
-      <button class="exit-btn" onclick="goHome()">✕</button>
-      <div style="font-weight:800; font-size:15px;">المتصدرون 🏆</div>
-      <div style="width:36px;"></div>
-    </div>
-    <div id="lbList"></div>
-  </div>
-
-  <!-- STORE -->
-  <div class="screen" id="screen-store">
-    <div class="game-top">
-      <button class="exit-btn" onclick="goHome()">✕</button>
-      <div style="font-weight:800; font-size:15px;">المتجر 🎨</div>
-      <div style="width:36px;"></div>
-    </div>
-    <p style="text-align:center; color:var(--ink-dim);">قريباً: متاجر وشارات جديدة!</p>
-  </div>
-
 </div>
 
 <script>
-const diffConfig = {
-  kids: {time:15, color:'var(--kids)', max:10, rounds:6, label:'أطفال'},
-  easy:   {time:15, color:'var(--easy)',  max:20,  rounds:8,  label:'سهل'},
-  medium: {time:15, color:'var(--med)',   max:50, rounds:10, label:'متوسط'},
-  hard:   {time:15, color:'var(--hard)',  max:99, rounds:12, label:'صعب'}
-};
+    let score = 0;
+    let highScore = localStorage.getItem('numChallenge_highScore') || 0;
+    let streak = 0;
+    let currentAnswer = 0;
+    let timerInterval;
+    let timeLeft = 100;
 
-let currentDiff = 'easy';
-let currentRound = 0;
-let score = 0;
-let streak = 0;
-let maxStreak = 0;
-let timer = null;
-let timeLeft = 0;
-let correctAnswer = 0;
+    document.getElementById('highScore').innerText = highScore;
 
-let best = {kids:0, easy:0, medium:0, hard:0};
+    function startGame() {
+        score = 0;
+        streak = 0;
+        document.getElementById('score').innerText = score;
+        document.getElementById('streakBox').innerText = `سلسلة الإجابات: ${streak} 🔥`;
+        
+        document.getElementById('startScreen').classList.add('hidden');
+        document.getElementById('endScreen').classList.add('hidden');
+        document.getElementById('gameScreen').classList.remove('hidden');
 
-// نظام المؤثرات الصوتية والاهتزاز المدمج
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-function triggerSuccessFX() {
-  if (navigator.vibrate) navigator.vibrate(40); // اهتزاز خفيف جداً
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  
-  // صوت تصفيق/تشجيع نغمي مبهج
-  const notes = [440, 554.37, 659.25, 880];
-  notes.forEach((freq, idx) => {
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.06);
-    gain.gain.setValueAtTime(0.08, audioCtx.currentTime + idx * 0.06);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.06 + 0.15);
-    osc.start(audioCtx.currentTime + idx * 0.06);
-    osc.stop(audioCtx.currentTime + idx * 0.06 + 0.15);
-  });
-}
-
-function triggerFailFX() {
-  if (navigator.vibrate) navigator.vibrate([80, 40, 80]); // اهتزاز الخسارة
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-
-  // صوت إخفاق/خسارة
-  const osc = audioCtx.createOscillator();
-  const gain = audioCtx.createGain();
-  osc.connect(gain);
-  gain.connect(audioCtx.destination);
-  osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-  osc.frequency.linearRampToValueAtTime(120, audioCtx.currentTime + 0.3);
-  gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-  gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-  osc.start();
-  osc.stop(audioCtx.currentTime + 0.3);
-}
-
-const badgeDefs = [
-  {min:0,   icon:'🐣', label:'مبتدئ'},
-  {min:50,  icon:'⭐', label:'صاعد'},
-  {min:150, icon:'🔥', label:'محترف'},
-  {min:300, icon:'🧠', label:'عبقري'},
-  {min:500, icon:'👑', label:'أسطورة'},
-];
-
-function renderBadges(){
-  const row = document.getElementById('badgesRow');
-  const total = best.easy + best.medium + best.hard + best.kids;
-  row.innerHTML = badgeDefs.map(b=>{
-    const unlocked = total >= b.min;
-    return `<div class="badge ${unlocked?'':'locked'}">
-      <div class="badge-icon">${b.icon}</div>
-      <div class="badge-label">${b.label}</div>
-    </div>`;
-  }).join('');
-}
-
-renderBadges();
-
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-function goHome(){
-  clearInterval(timer);
-  document.getElementById('bestEasy').textContent = best.easy;
-  document.getElementById('bestMed').textContent = best.medium;
-  document.getElementById('bestHard').textContent = best.hard;
-  renderBadges();
-  showScreen('screen-home');
-}
-
-function startGame(diff){
-  currentDiff = diff;
-  currentRound = 0;
-  score = 0;
-  streak = 0;
-  maxStreak = 0;
-  document.getElementById('scoreVal').textContent = score;
-  document.getElementById('streakPill').textContent = `🔥 ${streak}`;
-  showScreen('screen-game');
-  nextQuestion();
-}
-
-function nextQuestion(){
-  currentRound++;
-  const conf = diffConfig[currentDiff];
-  if(currentRound > conf.rounds){
-    endGame(true);
-    return;
-  }
-
-  document.getElementById('qLabel').textContent = `سؤال ${currentRound} من ${conf.rounds}`;
-  
-  let num1 = Math.floor(Math.random() * conf.max) + 1;
-  let num2 = Math.floor(Math.random() * conf.max) + 1;
-  correctAnswer = num1 + num2;
-
-  document.getElementById('qExpr').textContent = `${num1} + ${num2}`;
-
-  let answers = [correctAnswer];
-  while(answers.length < 4){
-    let wrong = correctAnswer + Math.floor(Math.random() * 9) - 4;
-    if(wrong !== correctAnswer && wrong >= 0 && !answers.includes(wrong)){
-      answers.push(wrong);
+        nextQuestion();
     }
-  }
-  answers.sort(() => Math.random() - 0.5);
 
-  const answersArea = document.getElementById('answersArea');
-  answersArea.innerHTML = '';
-  answers.forEach(ans => {
-    const btn = document.createElement('button');
-    btn.className = 'opt-btn';
-    btn.textContent = ans;
-    btn.onclick = () => checkAnswer(ans);
-    answersArea.appendChild(btn);
-  });
+    function generateQuestion() {
+        const ops = ['+', '-', '*'];
+        const op = ops[Math.floor(Math.random() * ops.length)];
+        let num1, num2;
 
-  startTimer(conf.time);
-}
+        if (op === '+') {
+            num1 = Math.floor(Math.random() * 50) + 1;
+            num2 = Math.floor(Math.random() * 50) + 1;
+            currentAnswer = num1 + num2;
+        } else if (op === '-') {
+            num1 = Math.floor(Math.random() * 50) + 10;
+            num2 = Math.floor(Math.random() * num1);
+            currentAnswer = num1 - num2;
+        } else if (op === '*') {
+            num1 = Math.floor(Math.random() * 12) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            currentAnswer = num1 * num2;
+        }
 
-function startTimer(seconds){
-  clearInterval(timer);
-  timeLeft = seconds;
-  const fill = document.getElementById('timerFill');
-  fill.style.width = '100%';
-  fill.style.background = diffConfig[currentDiff].color;
-
-  timer = setInterval(() => {
-    timeLeft--;
-    fill.style.width = `${(timeLeft / seconds) * 100}%`;
-    if(timeLeft <= 0){
-      clearInterval(timer);
-      triggerFailFX();
-      checkAnswer(null);
+        document.getElementById('questionBox').innerText = `${num1} ${op} ${num2}`;
     }
-  }, 1000);
-}
 
-function checkAnswer(selected){
-  clearInterval(timer);
-  if(selected === correctAnswer){
-    triggerSuccessFX();
-    score += 10;
-    streak++;
-    if(streak > maxStreak) maxStreak = streak;
-  } else {
-    triggerFailFX();
-    streak = 0;
-  }
-  document.getElementById('scoreVal').textContent = score;
-  document.getElementById('streakPill').textContent = `🔥 ${streak}`;
-  nextQuestion();
-}
+    function nextQuestion() {
+        generateQuestion();
+        renderOptions();
+        resetTimer();
+    }
 
-function endGame(completed){
-  clearInterval(timer);
-  if(score > best[currentDiff]){
-    best[currentDiff] = score;
-  }
-  document.getElementById('resScore').textContent = score;
-  document.getElementById('resStreak').textContent = maxStreak;
-  showScreen('screen-result');
-}
+    function renderOptions() {
+        const grid = document.getElementById('optionsGrid');
+        grid.innerHTML = '';
+        
+        let options = [currentAnswer];
+        while (options.length < 4) {
+            let wrong = currentAnswer + (Math.floor(Math.random() * 10) - 5);
+            if (wrong !== currentAnswer && wrong >= 0 && !options.includes(wrong)) {
+                options.push(wrong);
+            }
+        }
 
-function retryGame(){
-  startGame(currentDiff);
-}
+        options.sort(() => Math.random() - 0.5);
 
-function openLeaderboard(){
-  const list = document.getElementById('lbList');
-  list.innerHTML = `
-    <div class="lb-row"><div class="lb-rank">1</div><div class="lb-name">لاعب أسطوري</div><div class="lb-score">450</div></div>
-    <div class="lb-row"><div class="lb-rank">2</div><div class="lb-name">أنت</div><div class="lb-score">${best.easy + best.medium + best.hard + best.kids}</div></div>
-  `;
-  showScreen('screen-leaderboard');
-}
+        options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'btn';
+            btn.innerText = opt;
+            btn.onclick = () => checkAnswer(opt);
+            grid.appendChild(btn);
+        });
+    }
 
-function openStore(){
-  showScreen('screen-store');
-}
+    function checkAnswer(selected) {
+        if (selected === currentAnswer) {
+            streak++;
+            score += 10 + (streak > 3 ? 5 : 0); // مكافأة السلسلة
+            document.getElementById('score').innerText = score;
+            document.getElementById('streakBox').innerText = `سلسلة الإجابات: ${streak} 🔥`;
+            nextQuestion();
+        } else {
+            endGame();
+        }
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        timeLeft = 100;
+        const fill = document.getElementById('timerFill');
+        
+        timerInterval = setInterval(() => {
+            timeLeft -= 2;
+            fill.style.width = `${timeLeft}%`;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                endGame();
+            }
+        }, 100);
+    }
+
+    function endGame() {
+        clearInterval(timerInterval);
+        if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('numChallenge_highScore', highScore);
+            document.getElementById('highScore').innerText = highScore;
+        }
+
+        document.getElementById('finalScore').innerText = score;
+        document.getElementById('gameScreen').classList.add('hidden');
+        document.getElementById('endScreen').classList.remove('hidden');
+    }
 </script>
+
 </body>
 </html>
