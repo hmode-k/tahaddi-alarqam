@@ -368,6 +368,45 @@ let correctAnswer = 0;
 
 let best = {kids:0, easy:0, medium:0, hard:0};
 
+// نظام المؤثرات الصوتية والاهتزاز المدمج
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function triggerSuccessFX() {
+  if (navigator.vibrate) navigator.vibrate(40); // اهتزاز خفيف جداً
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  
+  // صوت تصفيق/تشجيع نغمي مبهج
+  const notes = [440, 554.37, 659.25, 880];
+  notes.forEach((freq, idx) => {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.06);
+    gain.gain.setValueAtTime(0.08, audioCtx.currentTime + idx * 0.06);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.06 + 0.15);
+    osc.start(audioCtx.currentTime + idx * 0.06);
+    osc.stop(audioCtx.currentTime + idx * 0.06 + 0.15);
+  });
+}
+
+function triggerFailFX() {
+  if (navigator.vibrate) navigator.vibrate([80, 40, 80]); // اهتزاز الخسارة
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+
+  // صوت إخفاق/خسارة
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+  osc.frequency.linearRampToValueAtTime(120, audioCtx.currentTime + 0.3);
+  gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+  osc.start();
+  osc.stop(audioCtx.currentTime + 0.3);
+}
+
 const badgeDefs = [
   {min:0,   icon:'🐣', label:'مبتدئ'},
   {min:50,  icon:'⭐', label:'صاعد'},
@@ -466,6 +505,7 @@ function startTimer(seconds){
     fill.style.width = `${(timeLeft / seconds) * 100}%`;
     if(timeLeft <= 0){
       clearInterval(timer);
+      triggerFailFX();
       checkAnswer(null);
     }
   }, 1000);
@@ -474,10 +514,12 @@ function startTimer(seconds){
 function checkAnswer(selected){
   clearInterval(timer);
   if(selected === correctAnswer){
+    triggerSuccessFX();
     score += 10;
     streak++;
     if(streak > maxStreak) maxStreak = streak;
   } else {
+    triggerFailFX();
     streak = 0;
   }
   document.getElementById('scoreVal').textContent = score;
