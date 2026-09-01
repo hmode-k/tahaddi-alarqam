@@ -7,36 +7,29 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
-<meta name="theme-color" content="#11152A">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="تحدي الأرقام">
+<meta name="theme-color" content="#0f172a">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&display=swap');
 
 :root{
-  --bg:#11152A;
-  --bg2:#171C38;
-  --card:#1C2346;
-  --line:#2C3568;
-  --ink:#EDEFFB;
-  --ink-dim:#8991C4;
-  --easy:#3FCB82;
-  --easy-d:#255C40;
-  --med:#F5AA3C;
-  --med-d:#6B4C1A;
-  --hard:#F45F60;
-  --hard-d:#6B2A2A;
-  --gold:#FFD166;
-  --kids:#4FB8E8;
-  --kids-d:#1E4C63;
+  --bg:#0f172a;
+  --bg2:#1e1b4b;
+  --card:#1e293b;
+  --line:#334155;
+  --ink:#f8fafc;
+  --ink-dim:#94a3b8;
+  --easy:#10b981;
+  --med:#f59e0b;
+  --hard:#ef4444;
+  --gold:#fbbf24;
+  --purple:#8b5cf6;
 }
 *{box-sizing:border-box;}
 body{
   margin:0;
   background:var(--bg);
-  background-image:radial-gradient(circle at 90% -10%, rgba(63,203,130,.10), transparent 40%),
-                    radial-gradient(circle at 0% 100%, rgba(244,95,96,.08), transparent 40%);
+  background-image:radial-gradient(circle at 90% -10%, rgba(139,92,246,.15), transparent 40%),
+                    radial-gradient(circle at 0% 100%, rgba(16,185,129,.15), transparent 40%);
   color:var(--ink);
   font-family:'Cairo',sans-serif;
   min-height:100vh;
@@ -54,10 +47,10 @@ body{
 }
 .brand{text-align:center; margin-bottom:8px;}
 .brand h1{
-  font-size:30px;
+  font-size:32px;
   font-weight:900;
   margin:0 0 4px;
-  background:linear-gradient(90deg,var(--easy),var(--med),var(--hard));
+  background:linear-gradient(90deg,var(--easy),var(--gold),var(--purple));
   -webkit-background-clip:text;
   background-clip:text;
   color:transparent;
@@ -74,37 +67,6 @@ body{
 .best-item .n{font-size:20px; font-weight:800; color:var(--gold);}
 .best-item .l{font-size:11px; color:var(--ink-dim); margin-top:2px;}
 
-.daily-card{
-  display:flex; align-items:center; justify-content:space-between;
-  background:linear-gradient(90deg,#173226,#1C2346);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:14px 16px;
-  margin-bottom:14px;
-  cursor:pointer;
-}
-.daily-title{font-size:14px; font-weight:800; color:var(--easy);}
-.daily-sub{font-size:11.5px; color:var(--ink-dim); margin-top:2px;}
-.daily-cta{
-  background:var(--easy-d); color:var(--easy); font-weight:800; font-size:13px;
-  padding:9px 16px; border-radius:10px;
-}
-
-.badges-row{
-  display:flex; gap:10px; overflow-x:auto; margin-bottom:16px; padding-bottom:2px;
-  -ms-overflow-style:none; scrollbar-width:none;
-}
-.badges-row::-webkit-scrollbar{display:none;}
-.badge{
-  flex:0 0 auto; width:60px; text-align:center;
-}
-.badge-icon{
-  width:52px; height:52px; border-radius:16px; background:var(--card); border:1px solid var(--line);
-  display:flex; align-items:center; justify-content:center; font-size:22px; margin:0 auto 4px;
-}
-.badge.locked .badge-icon{opacity:.35; filter:grayscale(1);}
-.badge-label{font-size:9.5px; color:var(--ink-dim);}
-
 .diff-card{
   border-radius:18px;
   padding:20px;
@@ -116,78 +78,20 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  background:linear-gradient(135deg,#1e1b4b,var(--card));
 }
-.diff-card[data-d="easy"]{background:linear-gradient(135deg,#173A2C,var(--card));}
-.diff-card[data-d="medium"]{background:linear-gradient(135deg,#3A2E14,var(--card));}
-.diff-card[data-d="hard"]{background:linear-gradient(135deg,#3A1717,var(--card));}
-.diff-card[data-d="kids"]{background:linear-gradient(135deg,#123246,var(--card));}
 .diff-card:active{transform:scale(.98);}
-.diff-name{font-size:17px; font-weight:800; margin:0 0 3px;}
+.diff-name{font-size:17px; font-weight:800; margin:0 0 3px; color:var(--purple);}
 .diff-desc{font-size:12px; color:var(--ink-dim); margin:0;}
-.diff-card[data-d="easy"] .diff-name{color:var(--easy);}
-.diff-card[data-d="medium"] .diff-name{color:var(--med);}
-.diff-card[data-d="hard"] .diff-name{color:var(--hard);}
-.diff-card[data-d="kids"] .diff-name{color:var(--kids);}
 .diff-badge{
-  font-size:22px;
-  width:44px; height:44px;
-  border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  font-weight:900;
-}
-.diff-card[data-d="easy"] .diff-badge{background:var(--easy-d); color:var(--easy);}
-.diff-card[data-d="medium"] .diff-badge{background:var(--med-d); color:var(--med);}
-.diff-card[data-d="hard"] .diff-badge{background:var(--hard-d); color:var(--hard);}
-.diff-card[data-d="kids"] .diff-badge{background:var(--kids-d); color:var(--kids);}
-
-/* monetization */
-.premium-banner{
-  display:flex; align-items:center; justify-content:space-between;
-  background:linear-gradient(90deg,#3A2E14,#2A2350);
-  border:1px solid var(--line);
-  border-radius:16px;
-  padding:14px 16px;
-  margin-bottom:16px;
-}
-.premium-banner .pb-text{font-size:13px; font-weight:700;}
-.premium-banner .pb-sub{font-size:11px; color:var(--ink-dim); margin-top:2px;}
-.premium-banner button{
-  background:var(--gold); color:#2A1F00; border:none; border-radius:10px;
-  padding:9px 14px; font-family:'Cairo',sans-serif; font-weight:800; font-size:12.5px; cursor:pointer;
-}
-.ad-banner{
-  background:var(--card); border:1px dashed var(--line);
-  border-radius:12px; padding:10px; text-align:center;
-  font-size:11px; color:var(--ink-dim); margin-bottom:16px;
-}
-
-.ad-modal-overlay{
-  position:fixed; inset:0; background:rgba(8,10,22,.85);
-  display:none; align-items:center; justify-content:center; z-index:20; padding:24px;
-}
-.ad-modal-overlay.show{display:flex;}
-.ad-modal{
-  background:var(--card); border:1px solid var(--line); border-radius:20px;
-  padding:30px 22px; text-align:center; max-width:340px; width:100%;
-}
-.ad-modal .ad-tag{font-size:10.5px; color:var(--ink-dim); letter-spacing:.5px; margin-bottom:10px;}
-.ad-modal .ad-title{font-size:16px; font-weight:800; margin-bottom:8px;}
-.ad-modal .ad-body{font-size:12.5px; color:var(--ink-dim); margin-bottom:20px; line-height:1.7;}
-.ad-modal button{
-  width:100%; padding:14px; border:none; border-radius:12px;
-  background:var(--gold); color:#2A1F00; font-family:'Cairo',sans-serif; font-weight:800; font-size:14px;
-  cursor:pointer;
-}
-.ad-modal .skip{
-  background:transparent; color:var(--ink-dim); font-weight:600; font-size:12.5px; margin-top:10px;
+  font-size:22px; width:44px; height:44px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center; font-weight:900;
+  background:rgba(139,92,246,0.2); color:var(--purple);
 }
 
 /* GAME */
 .game-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:18px;
+  display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;
 }
 .exit-btn{
   background:var(--card); border:1px solid var(--line); color:var(--ink-dim);
@@ -199,116 +103,44 @@ body{
   display:flex; align-items:center; gap:6px;
 }
 .score-pill .gold{color:var(--gold);}
-.streak-pill{
-  background:var(--card); border:1px solid var(--line);
-  padding:7px 12px; border-radius:20px; font-size:13px; font-weight:700; color:var(--hard);
-}
 
 .timer-track{
-  height:6px; background:var(--card); border-radius:4px; overflow:hidden; margin-bottom:26px;
+  height:8px; background:var(--card); border-radius:4px; overflow:hidden; margin-bottom:16px;
 }
-.timer-fill{height:100%; border-radius:4px; transition:width 1s linear, background .3s;}
+.timer-fill{height:100%; border-radius:4px; background:var(--gold); transition:width 0.1s linear;}
 
 .q-card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:20px;
-  padding:38px 20px;
-  text-align:center;
-  margin-bottom:22px;
+  background:var(--card); border:1px solid var(--line); border-radius:20px;
+  padding:30px 20px; text-align:center; margin-bottom:16px;
 }
 .q-label{font-size:12px; color:var(--ink-dim); margin-bottom:10px;}
-.q-expr{font-size:38px; font-weight:800; letter-spacing:1px; direction:ltr;}
+.q-expr{font-size:38px; font-weight:800; letter-spacing:1px;}
 
-.q-visual{
-  display:flex; justify-content:center; align-items:center; flex-wrap:wrap;
-  gap:6px; margin-top:16px; font-size:22px; min-height:0;
-}
-.q-visual span{display:inline-block; animation:objBounce 1.4s ease-in-out infinite;}
-.q-visual .sep{font-size:20px; color:var(--ink-dim); margin:0 4px; align-self:center;}
-@keyframes objBounce{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-6px);}
-}
-
-.kids-bg{
-  position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none;
-}
-.kids-bg span{
-  position:absolute; bottom:-60px; font-size:26px; opacity:.55;
-  animation:floatUp linear infinite;
-}
-@keyframes floatUp{
-  0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:0;}
-  10%{opacity:.55;}
-  90%{opacity:.5;}
-  100%{transform:translateY(-115vh) translateX(20px) rotate(25deg); opacity:0;}
-}
-
-.answers{display:flex; flex-direction:column; gap:10px;}
-.tf-row{display:flex; gap:10px;}
+.answers{display:grid; grid-template-columns:repeat(2, 1fr); gap:12px; margin-bottom:16px;}
 .opt-btn{
-  flex:1;
-  padding:16px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:var(--card);
-  color:var(--ink);
-  font-family:'Cairo',sans-serif;
-  font-size:16px;
-  font-weight:700;
-  cursor:pointer;
+  padding:18px; border-radius:14px; border:1px solid var(--line);
+  background:var(--card); color:var(--ink); font-family:'Cairo',sans-serif;
+  font-size:20px; font-weight:800; cursor:pointer;
 }
-.opt-btn:active{opacity:.8;}
-.opt-btn.correct{background:var(--easy-d); border-color:var(--easy); color:var(--easy);}
-.opt-btn.wrong{background:var(--hard-d); border-color:var(--hard); color:var(--hard);}
+.opt-btn:active{opacity:.8; transform:scale(0.98);}
 
-.type-row{display:flex; gap:10px;}
-.type-input{
-  flex:1;
-  padding:16px;
-  border-radius:14px;
-  border:1px solid var(--line);
-  background:var(--card);
-  color:var(--ink);
-  font-family:'Cairo',sans-serif;
-  font-size:18px;
-  font-weight:700;
-  text-align:center;
-}
-.type-input:focus{outline:none; border-color:var(--gold);}
-.submit-btn{
-  padding:16px 22px;
-  border-radius:14px;
-  border:none;
-  background:var(--gold);
-  color:#2A1F00;
-  font-family:'Cairo',sans-serif;
-  font-weight:800;
-  font-size:15px;
-  cursor:pointer;
+.help-btn{
+  width:100%; padding:12px; border-radius:12px; border:1px solid var(--purple);
+  background:rgba(139,92,246,0.15); color:var(--purple); font-family:'Cairo',sans-serif;
+  font-weight:700; font-size:14px; cursor:pointer; text-align:center;
 }
 
 /* RESULT */
-.result-card{
-  text-align:center;
-  padding:40px 20px;
-}
+.result-card{text-align:center; padding:40px 20px;}
 .result-emoji{font-size:52px; margin-bottom:14px;}
 .result-title{font-size:22px; font-weight:800; margin-bottom:6px;}
-.result-sub{font-size:14px; color:var(--ink-dim); margin-bottom:26px;}
-.result-stats{
-  display:flex;
-  justify-content:center;
-  gap:26px;
-  margin-bottom:30px;
-}
+.result-stats{display:flex; justify-content:center; gap:26px; margin:20px 0 30px;}
 .result-stats .n{font-size:24px; font-weight:800; color:var(--gold);}
 .result-stats .l{font-size:11.5px; color:var(--ink-dim); margin-top:3px;}
 .result-actions{display:flex; flex-direction:column; gap:10px;}
 .btn-primary{
   padding:15px; border-radius:14px; border:none;
-  background:var(--gold); color:#2A1F00; font-weight:800; font-size:15px;
+  background:var(--gold); color:#0f172a; font-weight:800; font-size:15px;
   font-family:'Cairo',sans-serif; cursor:pointer;
 }
 .btn-secondary{
@@ -316,39 +148,6 @@ body{
   background:transparent; color:var(--ink); font-weight:700; font-size:14.5px;
   font-family:'Cairo',sans-serif; cursor:pointer;
 }
-
-/* LEADERBOARD / STORE / PARENT */
-.lb-row{
-  display:flex; align-items:center; gap:12px;
-  background:var(--card); border:1px solid var(--line); border-radius:14px;
-  padding:12px 14px; margin-bottom:8px;
-}
-.lb-row.me{border-color:var(--gold); background:linear-gradient(90deg,#3A2E14,var(--card));}
-.lb-rank{width:22px; font-weight:800; color:var(--ink-dim); font-size:13px;}
-.lb-row.me .lb-rank{color:var(--gold);}
-.lb-name{flex:1; font-size:14px; font-weight:700;}
-.lb-score{font-size:13.5px; font-weight:800; color:var(--gold);}
-
-.store-item{
-  display:flex; align-items:center; justify-content:space-between;
-  background:var(--card); border:1px solid var(--line); border-radius:14px;
-  padding:14px; margin-bottom:10px;
-}
-.store-swatch{width:38px; height:38px; border-radius:10px; flex:0 0 auto;}
-.store-info{flex:1; padding:0 12px;}
-.store-name{font-size:14px; font-weight:700;}
-.store-price{font-size:11.5px; color:var(--ink-dim); margin-top:2px;}
-.store-item button{
-  background:var(--gold); color:#2A1F00; border:none; border-radius:10px;
-  padding:8px 14px; font-family:'Cairo',sans-serif; font-weight:800; font-size:12.5px; cursor:pointer;
-}
-
-.parent-stat{
-  background:var(--card); border:1px solid var(--line); border-radius:14px;
-  padding:14px; margin-bottom:10px;
-}
-.parent-stat-top{display:flex; justify-content:space-between; font-size:13.5px; font-weight:700; margin-bottom:8px;}
-.parent-stat-top span:last-child{color:var(--gold);}
 </style>
 </head>
 <body>
@@ -356,200 +155,98 @@ body{
 
   <!-- HOME -->
   <div class="screen active" id="screen-home">
-    <div class="top-actions">
-      <button class="icon-btn" onclick="openLeaderboard()">🏆 المتصدرون</button>
-      <button class="icon-btn" onclick="openStore()">🎨 المتجر</button>
-    </div>
     <div class="brand">
       <h1>تحدي الأرقام</h1>
-      <p>اختبر سرعتك وذكائك بالحساب</p>
+      <p>اختبر سرعة تفكيرك وحساباتك</p>
     </div>
     <div class="best-row">
-      <div class="best-item"><div class="n" id="bestEasy">0</div><div class="l">أفضل نتيجة سهل</div></div>
-      <div class="best-item"><div class="n" id="bestMed">0</div><div class="l">متوسط</div></div>
-      <div class="best-item"><div class="n" id="bestHard">0</div><div class="l">صعب</div></div>
+      <div class="best-item"><div class="n" id="bestScore">0</div><div class="l">أعلى نتيجة</div></div>
     </div>
 
-    <div class="daily-card" onclick="startGame('easy')">
-      <div class="daily-left">
-        <div class="daily-title">التحدي اليومي 🔥</div>
-        <div class="daily-sub"><span id="dailyStreakTxt">يومك الأول</span> · نقاط مضاعفة اليوم</div>
-      </div>
-      <div class="daily-cta">العب</div>
-    </div>
-
-    <div class="badges-row" id="badgesRow"></div>
-
-    <div class="premium-banner">
+    <div class="diff-card" onclick="startGame()">
       <div>
-        <div class="pb-text">النسخة الذهبية ⭐</div>
-        <div class="pb-sub">بدون إعلانات + مستويات إضافية · دفعة وحدة</div>
+        <p class="diff-name">ابدأ التحدي 🔥</p>
+        <p class="diff-desc">١٥ ثانية لكل سؤال + زر تجميد الوقت</p>
       </div>
-      <button onclick="alert('هذا نموذج تصميم — لاحقاً نربطه بعملية شراء حقيقية')">1.99$</button>
+      <div class="diff-badge">▶</div>
     </div>
-
-    <div class="diff-card" data-d="kids" onclick="startGame('kids')">
-      <div>
-        <p class="diff-name">أطفال 🧸</p>
-        <p class="diff-desc">أرقام صغيرة وبدون ضغط وقت · للصغار</p>
-      </div>
-      <div class="diff-badge">★</div>
-    </div>
-
-    <div class="diff-card" data-d="easy" onclick="startGame('easy')">
-      <div>
-        <p class="diff-name">سهل</p>
-        <p class="diff-desc">جمع وطرح بسيط · ١٥ ثانية لكل سؤال</p>
-      </div>
-      <div class="diff-badge">+</div>
-    </div>
-
-    <div class="diff-card" data-d="medium" onclick="startGame('medium')">
-      <div>
-        <p class="diff-name">متوسط</p>
-        <p class="diff-desc">ضرب وقسمة وأرقام أكبر · ١٠ ثواني</p>
-      </div>
-      <div class="diff-badge">×</div>
-    </div>
-
-    <div class="diff-card" data-d="hard" onclick="startGame('hard')">
-      <div>
-        <p class="diff-name">صعب</p>
-        <p class="diff-desc">معادلات مركبة وسرعة عالية · ٧ ثواني</p>
-      </div>
-      <div class="diff-badge">%</div>
-    </div>
-
-    <!--
-      مكان الإعلان (بانر) — هنا تحط كود شبكة الإعلانات الي تختارها.
-      مثال Google AdSense (بعد ما توافق عليك الشبكة):
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXXXX" data-ad-slot="XXXXXXXXXX" data-ad-format="auto"></ins>
-      لين تربطها بحساب حقيقي، خليها كذا كعنصر توضيحي:
-    -->
-    <div class="ad-banner">مساحة إعلان (بانر)</div>
   </div>
 
   <!-- GAME -->
   <div class="screen" id="screen-game">
-    <div class="kids-bg" id="kidsBg"></div>
     <div class="game-top">
       <button class="exit-btn" onclick="goHome()">✕</button>
-      <div class="streak-pill" id="streakPill">🔥 0</div>
       <div class="score-pill"><span class="gold" id="scoreVal">0</span> نقطة</div>
     </div>
     <div class="timer-track"><div class="timer-fill" id="timerFill"></div></div>
 
     <div class="q-card">
       <div class="q-label" id="qLabel">سؤال ١</div>
-      <div class="q-expr" id="qExpr">٥ + ٣ = ٨</div>
-      <div class="q-visual" id="qVisual"></div>
+      <div class="q-expr" id="qExpr">?</div>
     </div>
 
     <div class="answers" id="answersArea"></div>
+
+    <button class="help-btn" id="helpBtn" onclick="useFreezeHelp()">⏱️ تجميد الوقت (+5 ثواني)</button>
   </div>
 
   <!-- RESULT -->
   <div class="screen" id="screen-result">
     <div class="result-card">
-      <div class="result-emoji" id="resEmoji">🏆</div>
-      <div class="result-title" id="resTitle">أحسنت!</div>
-      <div class="result-sub" id="resSub">خلصت التحدي</div>
+      <div class="result-emoji">🏆</div>
+      <div class="result-title">انتهت الجولة!</div>
       <div class="result-stats">
-        <div><div class="n" id="resScore">0</div><div class="l">النقاط</div></div>
-        <div><div class="n" id="resStreak">0</div><div class="l">أفضل سلسلة</div></div>
-        <div><div class="n" id="resAcc">0%</div><div class="l">دقة الإجابات</div></div>
+        <div><div class="n" id="resScore">0</div><div class="l">مجموع النقاط</div></div>
       </div>
       <div class="result-actions">
-        <button class="btn-primary" onclick="watchAdForBonus()" id="bonusBtn">شاهد إعلان واربح نقاط مضاعفة 🎬</button>
-        <button class="btn-secondary" onclick="shareResult()">مشاركة النتيجة 📤</button>
-        <button class="btn-secondary" id="parentReportBtn" style="display:none;" onclick="openParentReport()">تقرير للأهل 👨‍👩‍👧</button>
-        <button class="btn-primary" onclick="retryGame()">إعادة المحاولة</button>
-        <button class="btn-secondary" onclick="goHome()">رجوع للرئيسية</button>
+        <button class="btn-primary" onclick="startGame()">لعبة جديدة</button>
+        <button class="btn-secondary" onclick="goHome()">الرئيسية</button>
       </div>
     </div>
   </div>
 
-  <!-- LEADERBOARD -->
-  <div class="screen" id="screen-leaderboard">
-    <div class="game-top">
-      <button class="exit-btn" onclick="goHome()">✕</button>
-      <div style="font-weight:800; font-size:15px;">المتصدرون 🏆</div>
-      <div style="width:36px;"></div>
-    </div>
-    <div id="lbList"></div>
-  </div>
-
-  <!-- STORE -->
-  <div class="screen" id="screen-store">
-    <div class="game-top">
-      <button class="exit-btn" onclick="goHome()">✕</button>
-      <div style="font-weight:800; font-size:15px;">المتجر 🎨</div>
-      <div style="width:36px;"></div>
-    </div>
-    <div id="storeList"></div>
-  </div>
-
-  <!-- PARENT REPORT -->
-  <div class="screen" id="screen-parent">
-    <div class="game-top">
-      <button class="exit-btn" onclick="goHome()">✕</button>
-      <div style="font-weight:800; font-size:15px;">تقرير للأهل</div>
-      <div style="width:36px;"></div>
-    </div>
-    <p style="font-size:13px; color:var(--ink-dim); margin-bottom:18px;">أداء طفلك بآخر جولة، مقسّم حسب نوع العملية الحسابية:</p>
-    <div id="parentStats"></div>
-  </div>
-
-</div>
-
-<div class="ad-modal-overlay" id="adOverlay">
-  <div class="ad-modal">
-    <div class="ad-tag">إعلان</div>
-    <div class="ad-title" id="adTitle">استمر بلا توقف 🚀</div>
-    <div class="ad-body" id="adBody">هذا مكان إعلان تجريبي بين الجولات. بالنسخة النهائية يظهر هنا إعلان حقيقي من شبكة إعلانات، أو تختفي هذي الشاشة نهائياً مع النسخة الذهبية.</div>
-    <button onclick="closeAd()" id="adCloseBtn">متابعة اللعب</button>
-  </div>
 </div>
 
 <script>
-const diffConfig = {
-  kids: {time:20, color:'var(--kids)', ops:['+','-'], max:10, rounds:6, label:'أطفال'},
-  easy:   {time:15, color:'var(--easy)',  ops:['+','-'], max:20,  rounds:8,  label:'سهل'},
-  medium: {time:10, color:'var(--med)',   ops:['×','-','+'], max:50, rounds:10, label:'متوسط'},
-  hard:   {time:7,  color:'var(--hard)',  ops:['×','÷','+','-'], max:99, rounds:12, label:'صعب'}
-};
+// الأوقات المحددة والتجهيز للصوت
+const TIME_LIMIT = 15;
+let score = 0;
+let currentRound = 0;
+let timer = null;
+let timeLeft = 0;
+let correctAnswer = 0;
+let bestScore = 0;
+let helpUsed = false;
 
-let state = {};
-let best = {kids:0, easy:0, medium:0, hard:0};
-let dailyStreak = 1;
-let coins = 0;
+// نظام المؤثرات الصوتية المدمج
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playSound(type) {
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
 
-const badgeDefs = [
-  {min:0,   icon:'🐣', label:'مبتدئ'},
-  {min:50,  icon:'⭐', label:'صاعد'},
-  {min:150, icon:'🔥', label:'محترف'},
-  {min:300, icon:'🧠', label:'عبقري'},
-  {min:500, icon:'👑', label:'أسطورة'},
-];
-
-function totalBestScore(){
-  return best.kids + best.easy + best.medium + best.hard;
+  if (type === 'correct') {
+    osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
+    osc.frequency.setValueAtTime(880, audioCtx.currentTime + 0.1); // A5
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.25);
+  } else if (type === 'wrong') {
+    osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+    osc.frequency.setValueAtTime(120, audioCtx.currentTime + 0.1);
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.25);
+  } else if (type === 'freeze') {
+    osc.frequency.setValueAtTime(400, audioCtx.currentTime);
+    osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.3);
+  }
 }
-
-function renderBadges(){
-  const row = document.getElementById('badgesRow');
-  const total = totalBestScore();
-  row.innerHTML = badgeDefs.map(b=>{
-    const unlocked = total >= b.min;
-    return `<div class="badge ${unlocked?'':'locked'}">
-      <div class="badge-icon">${b.icon}</div>
-      <div class="badge-label">${b.label}</div>
-    </div>`;
-  }).join('');
-}
-
-document.getElementById('dailyStreakTxt').textContent = `يومك ${dailyStreak} متتالي`;
-renderBadges();
 
 function showScreen(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
@@ -557,365 +254,96 @@ function showScreen(id){
 }
 
 function goHome(){
-  clearInterval(state.timer);
-  document.getElementById('bestEasy').textContent = best.easy;
-  document.getElementById('bestMed').textContent = best.medium;
-  document.getElementById('bestHard').textContent = best.hard;
-  renderBadges();
+  clearInterval(timer);
+  document.getElementById('bestScore').textContent = bestScore;
   showScreen('screen-home');
 }
 
-function openLeaderboard(){
-  const mine = totalBestScore();
-  const fake = [
-    {name:'أحمد', score: mine + randInt(80,200)},
-    {name:'مريم', score: mine + randInt(20,90)},
-    {name:'أنت', score: mine, me:true},
-    {name:'يوسف', score: Math.max(0, mine - randInt(10,60))},
-    {name:'زهراء', score: Math.max(0, mine - randInt(60,150))},
-  ].sort((a,b)=>b.score-a.score);
-  document.getElementById('lbList').innerHTML = fake.map((p,i)=>`
-    <div class="lb-row ${p.me?'me':''}">
-      <div class="lb-rank">${i+1}</div>
-      <div class="lb-name">${p.name}</div>
-      <div class="lb-score">${p.score}</div>
-    </div>`).join('');
-  showScreen('screen-leaderboard');
-}
-
-const storeThemes = [
-  {name:'ثيم الغابة', color:'#3FCB82', price:'0.99$'},
-  {name:'ثيم الفضاء', color:'#5C86C4', price:'0.99$'},
-  {name:'ثيم الصحراء', color:'#F5AA3C', price:'0.99$'},
-  {name:'شخصية الروبوت', color:'#C48FD6', price:'1.49$'},
-];
-function openStore(){
-  document.getElementById('storeList').innerHTML = storeThemes.map(t=>`
-    <div class="store-item">
-      <div class="store-swatch" style="background:${t.color}"></div>
-      <div class="store-info">
-        <div class="store-name">${t.name}</div>
-        <div class="store-price">${t.price}</div>
-      </div>
-      <button onclick="alert('نموذج تصميم — لاحقاً يرتبط بعملية شراء حقيقية')">شراء</button>
-    </div>`).join('');
-  showScreen('screen-store');
-}
-
-function shareResult(){
-  const text = `حصلت ${state.score} نقطة بمستوى ${diffConfig[state.diff].label} بلعبة تحدي الأرقام! جرب تكسر رقمي 🔥`;
-  if(navigator.share){
-    navigator.share({text}).catch(()=>{});
-  } else {
-    alert(text);
-  }
-}
-
-function watchAdForBonus(){
-  const overlay = document.getElementById('adOverlay');
-  window.adMode = 'bonus';
-  document.getElementById('adTitle').textContent = 'إعلان مكافأة 🎬';
-  document.getElementById('adBody').textContent = 'شاهد هذا الإعلان الترويجي لتربح ضعف نقاطك بهذي الجولة.';
-  const btn = document.getElementById('adCloseBtn');
-  btn.disabled = true;
-  let s = 3;
-  btn.textContent = `جاري العرض (${s})`;
-  overlay.classList.add('show');
-  const cd = setInterval(()=>{
-    s--;
-    if(s<=0){
-      clearInterval(cd);
-      btn.disabled = false;
-      btn.textContent = 'استلام المكافأة';
-    } else {
-      btn.textContent = `جاري العرض (${s})`;
-    }
-  },1000);
-  state.pendingBonus = true;
-}
-
-function opLabel(op){
-  return {'+':'جمع','-':'طرح','×':'ضرب','÷':'قسمة'}[op] || op;
-}
-
-function openParentReport(){
-  const stats = state.opStats || {};
-  const rows = Object.keys(stats).map(op=>{
-    const s = stats[op];
-    const pct = Math.round((s.correct/s.total)*100);
-    return `<div class="parent-stat">
-      <div class="parent-stat-top"><span>${opLabel(op)}</span><span>${s.correct}/${s.total} صح</span></div>
-      <div class="bar-track" style="background:var(--line); height:6px; border-radius:4px; overflow:hidden;">
-        <div style="height:100%; width:${pct}%; background:var(--kids); border-radius:4px;"></div>
-      </div>
-    </div>`;
-  }).join('') || '<p style="color:var(--ink-dim); font-size:13px;">لا توجد بيانات كافية بعد.</p>';
-  document.getElementById('parentStats').innerHTML = rows;
-  showScreen('screen-parent');
-}
-
-function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
-
-const kidsSkySet = ['🎈','⭐','🌈','☁️','🦋','🌸','✨'];
-const kidsObjectThemes = [
-  {emoji:'🍎', name:'تفاح'},
-  {emoji:'🐑', name:'خرفان'},
-  {emoji:'🚗', name:'سيارات'},
-  {emoji:'⚽', name:'كرات'},
-  {emoji:'🦆', name:'بط'},
-  {emoji:'🌟', name:'نجوم'},
-];
-let kidsTheme = kidsObjectThemes[0];
-
-function renderKidsBg(){
-  const bg = document.getElementById('kidsBg');
-  let html = '';
-  for(let i=0;i<12;i++){
-    const emoji = kidsSkySet[randInt(0,kidsSkySet.length-1)];
-    const left = randInt(0,96);
-    const dur = randInt(9,18);
-    const delay = -randInt(0,18);
-    const size = randInt(18,30);
-    html += `<span style="left:${left}%; font-size:${size}px; animation-duration:${dur}s; animation-delay:${delay}s;">${emoji}</span>`;
-  }
-  bg.innerHTML = html;
-}
-
-function renderQuestionVisual(q){
-  const visual = document.getElementById('qVisual');
-  if(state.diff !== 'kids' || q.op==='×' || q.op==='÷' || q.a==null){
-    visual.innerHTML = '';
-    return;
-  }
-  const e = kidsTheme.emoji;
-  const aIcons = Array.from({length:q.a}).map((_,i)=>`<span style="animation-delay:${i*0.08}s">${e}</span>`).join('');
-  const bIcons = Array.from({length:q.b}).map((_,i)=>`<span style="animation-delay:${i*0.08}s">${e}</span>`).join('');
-  const sep = q.op==='+' ? '+' : '−';
-  visual.innerHTML = `${aIcons}<span class="sep">${sep}</span>${bIcons}`;
-}
-
-function genQuestion(diff){
-  const cfg = diffConfig[diff];
-  const op = cfg.ops[randInt(0,cfg.ops.length-1)];
-  let a,b,answer;
-  if(op==='+'){ a=randInt(1,cfg.max); b=randInt(1,cfg.max); answer=a+b; }
-  else if(op==='-'){ a=randInt(1,cfg.max); b=randInt(1,a); answer=a-b; }
-  else if(op==='×'){ a=randInt(2,diff==='hard'?15:12); b=randInt(2,diff==='hard'?15:12); answer=a*b; }
-  else { b=randInt(2,12); answer=randInt(2,12); a=b*answer; }
-
-  const exprText = `${a} ${op} ${b}`;
-  const qtypes = diff==='kids' ? ['tf','mc'] : ['tf','mc','type'];
-  const qtype = qtypes[randInt(0,qtypes.length-1)];
-  const spread = diff==='kids' ? 3 : 6;
-
-  if(qtype==='tf'){
-    const showCorrect = Math.random() < 0.5;
-    const shown = showCorrect ? answer : Math.max(0, answer + (Math.random()<0.5 ? randInt(1,spread) : -randInt(1,spread)));
-    return {expr:`${exprText} = ${shown}`, type:'tf', answer: showCorrect, correctVal:answer, op, a, b};
-  }
-  if(qtype==='mc'){
-    const opts = new Set([answer]);
-    let guard=0;
-    while(opts.size<4 && guard<30){
-      guard++;
-      const cand = answer + randInt(-spread,spread)*(randInt(0,1)?1:-1);
-      if(cand>=0) opts.add(cand);
-    }
-    return {expr:exprText, type:'mc', options: shuffle([...opts]), answer, op, a, b};
-  }
-  return {expr:exprText, type:'type', answer, op, a, b};
-}
-
-function shuffle(arr){
-  for(let i=arr.length-1;i>0;i--){
-    const j=Math.floor(Math.random()*(i+1));
-    [arr[i],arr[j]]=[arr[j],arr[i]];
-  }
-  return arr;
-}
-
-function startGame(diff){
-  state = {
-    diff, cfg: diffConfig[diff],
-    round:0, score:0, streak:0, bestStreak:0,
-    correctCount:0, timer:null, opStats:{}
-  };
-  document.getElementById('streakPill').textContent = '🔥 0';
-  document.getElementById('scoreVal').textContent = '0';
-  if(diff==='kids'){
-    kidsTheme = kidsObjectThemes[randInt(0,kidsObjectThemes.length-1)];
-    renderKidsBg();
-    document.getElementById('kidsBg').style.display = 'block';
-  } else {
-    document.getElementById('kidsBg').style.display = 'none';
-  }
+function startGame(){
+  score = 0;
+  currentRound = 0;
+  helpUsed = false;
+  document.getElementById('scoreVal').textContent = score;
+  document.getElementById('helpBtn').style.display = 'block';
   showScreen('screen-game');
   nextQuestion();
 }
 
-function retryGame(){ startGame(state.diff); }
-
 function nextQuestion(){
-  state.round++;
-  if(state.round > state.cfg.rounds){ endGame(); return; }
-  if(state.round>1 && (state.round-1)%4===0){
-    showAd();
-    return;
-  }
-  loadQuestion();
-}
+  currentRound++;
+  document.getElementById('qLabel').textContent = `السؤال ${currentRound}`;
+  
+  let num1 = Math.floor(Math.random() * 20) + 1;
+  let num2 = Math.floor(Math.random() * 20) + 1;
+  correctAnswer = num1 + num2;
 
-function loadQuestion(){
-  state.q = genQuestion(state.diff);
-  state.answered = false;
-  document.getElementById('qLabel').textContent = `سؤال ${state.round} من ${state.cfg.rounds}`;
-  document.getElementById('qExpr').textContent = state.q.expr;
-  renderQuestionVisual(state.q);
-  renderAnswerArea();
+  document.getElementById('qExpr').textContent = `${num1} + ${num2}`;
+
+  let answers = [correctAnswer];
+  while(answers.length < 4){
+    let wrong = correctAnswer + Math.floor(Math.random() * 9) - 4;
+    if(wrong !== correctAnswer && wrong > 0 && !answers.includes(wrong)){
+      answers.push(wrong);
+    }
+  }
+  answers.sort(() => Math.random() - 0.5);
+
+  const answersArea = document.getElementById('answersArea');
+  answersArea.innerHTML = '';
+  answers.forEach(ans => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.textContent = ans;
+    btn.onclick = () => checkAnswer(ans);
+    answersArea.appendChild(btn);
+  });
+
   startTimer();
 }
 
-function showAd(){
-  clearInterval(state.timer);
-  const overlay = document.getElementById('adOverlay');
-  document.getElementById('adTitle').textContent = 'استمر بلا توقف 🚀';
-  document.getElementById('adBody').textContent = 'هذا مكان إعلان تجريبي بين الجولات. بالنسخة النهائية يظهر هنا إعلان حقيقي من شبكة إعلانات، أو تختفي هذي الشاشة نهائياً مع النسخة الذهبية.';
-  window.adMode = 'interstitial';
-  const btn = document.getElementById('adCloseBtn');
-  btn.disabled = true;
-  let s = 3;
-  btn.textContent = `متابعة اللعب (${s})`;
-  overlay.classList.add('show');
-  const cd = setInterval(()=>{
-    s--;
-    if(s<=0){
-      clearInterval(cd);
-      btn.disabled = false;
-      btn.textContent = 'متابعة اللعب';
-    } else {
-      btn.textContent = `متابعة اللعب (${s})`;
-    }
-  },1000);
-}
-
-function closeAd(){
-  document.getElementById('adOverlay').classList.remove('show');
-  if(window.adMode === 'bonus'){
-    if(state.pendingBonus){
-      state.score *= 2;
-      state.pendingBonus = false;
-      document.getElementById('resScore').textContent = state.score;
-      document.getElementById('bonusBtn').textContent = 'تم مضاعفة نقاطك ✓';
-      document.getElementById('bonusBtn').disabled = true;
-    }
-  } else {
-    loadQuestion();
-  }
-}
-
 function startTimer(){
-  clearInterval(state.timer);
-  let t = state.cfg.time;
+  clearInterval(timer);
+  timeLeft = TIME_LIMIT;
   const fill = document.getElementById('timerFill');
-  fill.style.transition = 'none';
   fill.style.width = '100%';
-  fill.style.background = state.cfg.color;
-  requestAnimationFrame(()=>{
-    fill.style.transition = `width ${t}s linear`;
-    fill.style.width = '0%';
-  });
-  state.timer = setInterval(()=>{
-    t--;
-    if(t<=0){ clearInterval(state.timer); if(!state.answered) submitAnswer(null); }
-  },1000);
+
+  timer = setInterval(() => {
+    timeLeft -= 0.1;
+    fill.style.width = `${(timeLeft / TIME_LIMIT) * 100}%`;
+    if(timeLeft <= 0){
+      clearInterval(timer);
+      playSound('wrong');
+      endGame();
+    }
+  }, 100);
 }
 
-function renderAnswerArea(){
-  const area = document.getElementById('answersArea');
-  const q = state.q;
-  if(q.type==='tf'){
-    area.innerHTML = `
-      <div class="tf-row">
-        <button class="opt-btn" onclick="submitAnswer(true)">صح ✓</button>
-        <button class="opt-btn" onclick="submitAnswer(false)">خطأ ✕</button>
-      </div>`;
-  } else if(q.type==='mc'){
-    area.innerHTML = `
-      <div class="tf-row">${q.options.slice(0,2).map(o=>`<button class="opt-btn" onclick="submitAnswer(${o})">${o}</button>`).join('')}</div>
-      <div class="tf-row">${q.options.slice(2,4).map(o=>`<button class="opt-btn" onclick="submitAnswer(${o})">${o}</button>`).join('')}</div>`;
-  } else {
-    area.innerHTML = `
-      <div class="type-row">
-        <input type="number" class="type-input" id="typeInput" placeholder="اكتب الجواب" inputmode="numeric" autofocus>
-        <button class="submit-btn" onclick="submitTypeAnswer()">تأكيد</button>
-      </div>`;
-    document.getElementById('typeInput').addEventListener('keydown', e=>{
-      if(e.key==='Enter') submitTypeAnswer();
-    });
+function useFreezeHelp(){
+  if(!helpUsed){
+    helpUsed = true;
+    timeLeft += 5;
+    playSound('freeze');
+    document.getElementById('helpBtn').style.display = 'none';
   }
 }
 
-function submitTypeAnswer(){
-  const val = document.getElementById('typeInput').value;
-  submitAnswer(val === '' ? null : parseInt(val));
-}
-
-function submitAnswer(val){
-  if(state.answered) return;
-  state.answered = true;
-  clearInterval(state.timer);
-  const q = state.q;
-  const correct = q.type==='tf' ? (val === q.answer) : (val === q.answer);
-
-  document.querySelectorAll('.opt-btn').forEach(b=>b.disabled=true);
-
-  const op = q.op;
-  if(!state.opStats[op]) state.opStats[op] = {correct:0, total:0};
-  state.opStats[op].total++;
-  if(correct) state.opStats[op].correct++;
-
-  if(correct){
-    state.score += (state.diff==='kids'?8:state.diff==='easy'?10:state.diff==='medium'?15:25) + state.streak*2;
-    state.streak++;
-    state.correctCount++;
-    if(state.streak > state.bestStreak) state.bestStreak = state.streak;
+function checkAnswer(selected){
+  clearInterval(timer);
+  if(selected === correctAnswer){
+    playSound('correct');
+    score += 10;
+    document.getElementById('scoreVal').textContent = score;
+    nextQuestion();
   } else {
-    state.streak = 0;
+    playSound('wrong');
+    endGame();
   }
-  document.getElementById('scoreVal').textContent = state.score;
-  document.getElementById('streakPill').textContent = '🔥 ' + state.streak;
-
-  setTimeout(nextQuestion, 550);
 }
 
 function endGame(){
-  clearInterval(state.timer);
-  if(state.score > best[state.diff]) best[state.diff] = state.score;
-  const acc = Math.round((state.correctCount/state.cfg.rounds)*100);
-  document.getElementById('resScore').textContent = state.score;
-  document.getElementById('resStreak').textContent = state.bestStreak;
-  document.getElementById('resAcc').textContent = acc + '%';
-  document.getElementById('resTitle').textContent = acc>=80 ? 'أحسنت! أداء رائع' : acc>=50 ? 'نتيجة زينة!' : 'حاول مرة ثانية';
-  document.getElementById('resEmoji').textContent = acc>=80 ? '🏆' : acc>=50 ? '👍' : '💪';
-  document.getElementById('resSub').textContent = `مستوى ${diffConfig[state.diff].label} · ${state.cfg.rounds} أسئلة`;
-  const bonusBtn = document.getElementById('bonusBtn');
-  bonusBtn.disabled = false;
-  bonusBtn.textContent = 'شاهد إعلان واربح نقاط مضاعفة 🎬';
-  document.getElementById('parentReportBtn').style.display = state.diff==='kids' ? 'block' : 'none';
+  if(score > bestScore) bestScore = score;
+  document.getElementById('resScore').textContent = score;
   showScreen('screen-result');
-}
-</script>
-
-<!--
-  كود تحميل شبكة الإعلانات (مثال AdSense) ينحط هنا بالنسخة النهائية، مثلاً:
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
--->
-
-<script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load', ()=>{
-    navigator.serviceWorker.register('service-worker.js').catch(()=>{});
-  });
 }
 </script>
 </body>
